@@ -1,4 +1,6 @@
-# [GraduationProject](https://kxind.cn)
+# 毕业设计
+花了两周折腾出来的毕业设计，从零开始一步步架构及设计，还算差强人意
+
 # 环境配置
    jdk1.8
    
@@ -16,6 +18,9 @@
    
    Webmagic 0.6.1
    
+   Echarts类库
+   
+   freemarker
 
 # web端框架
 Springboot/Mybatis/Shiro/maven/Echarts
@@ -32,14 +37,9 @@ Springboot/Mybatis/Shiro/maven/Echarts
 # 数据处理
 利用HanLp进行自然语言处理、分词、统计等。
   
-![HanLp+Echarts](http://static.kxind.cn/1501230086%281%29.jpg)
-
-
 # 数据展现
 Echarts图表展示
 
-  ![Echarts](https://static.kxind.cn/1501230146%281%29.jpg)
-  
 # 有待改进
 
 *  爬虫只能整站爬取，且与Web端模块分离
