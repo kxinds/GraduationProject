@@ -1,13 +1,21 @@
 # [GraduationProject](https://kxind.cn)
 ######环境配置
    jdk1.8
+   
    Maven 3.3.9
+   
    Mysql 5.6
+   
    SpringBoot 1.4.3
+   
    Shiro 1.2.5 
+   
    Gson 2.3.1
+   
    Mybatis 3.2.7
+   
    Webmagic 0.6.1
+   
 
 ######web端框架
 Springboot/Mybatis/Shiro/maven/Echarts
@@ -26,9 +34,14 @@ Springboot/Mybatis/Shiro/maven/Echarts
   
 ![HanLp+Echarts](http://static.kxind.cn/1501230086%281%29.jpg)
 
+
 ######数据展现
 Echarts图表展示
+
   ![Echarts](https://static.kxind.cn/1501230146%281%29.jpg)
+  
 ######有待改进
+
 *  爬虫只能整站爬取，且与Web端模块分离
+
 *  HanLp自然语言处理，文章数据量大加载过慢。 
