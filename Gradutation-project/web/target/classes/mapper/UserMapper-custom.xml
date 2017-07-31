@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.kxind.mybatis.dao.UserMapper">
+
+    <select id="selectPassword" resultType="cn.kxind.mybatis.bean.User">
+        SELECT *
+        FROM  auth_user WHERE name =#{name } AND pwd=#{pwd} AND status =0
+    </select>
+
+    <select id="selectName" resultType="cn.kxind.mybatis.bean.User">
+        SELECT *
+        FROM  auth_user WHERE name =#{name }  AND status =0
+    </select>
+
+    <resultMap id="getRole" type="cn.kxind.mybatis.bean.AuthRole">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+
+    <resultMap id="getFunction" type="cn.kxind.mybatis.bean.AuthFunction">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="url" column="url"/>
+        <result property="remark" column="remark"/>
+
+    </resultMap>
+    <!--根据useid 获取角色-->
+    <select id="selectRoleById" resultMap="getRole" parameterType="int">
+        SELECT auth_role.id as id ,auth_role.name as name from auth_user,auth_role,auth_user_role where
+        auth_user.id=auth_user_role.user_id AND auth_user_role.role_id=auth_role.id
+        AND  auth_user.id=#{id }
+    </select>
+
+    <!--根据roleid获取功能-->
+    <select id="selectFunctionById" resultMap="getFunction" parameterType="int">
+        SELECT  auth_function.id,auth_function.name,auth_function.parent_id,auth_function.url
+        ,auth_function.remark FROM
+       auth_function,auth_role,auth_role_function where
+        auth_function.id=auth_role_function.function_id AND auth_role_function.role_id=auth_role.id
+        AND  auth_role.id=#{id }
+    </select>
+
+
+</mapper>

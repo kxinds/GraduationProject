@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.kxind.mybatis.dao.EduInfoMapper">
+
+    <select id="getEduInfoNumber" resultType="int">
+        SELECT COUNT(id)
+        FROM  eduinfo
+    </select>
+    <select id="getCountByYear" resultType="cn.kxind.mybatis.vo.CountInfo">
+        select date_format(date,'%Y') AS infoYear ,COUNT(*) as infoCount
+        from eduinfo
+        GROUP BY infoYear
+    </select>
+
+    <select id="getImgNumber" resultType="int">
+     select count(*) from eduinfo WHERE imglist!=''
+    </select>
+
+    <select id="getAllNumber" resultType="int">
+      SELECT  count(*) from eduinfo
+
+    </select>
+
+
+
+    <select id="getEditorNumber" resultType="int">
+        select count(*) from eduinfo WHERE editor is not NULL
+    </select>
+
+    <select id="getProofreadNumber" resultType="int">
+        select count(*) from eduinfo WHERE proofread is not NULL
+    </select>
+
+    <select id="getReviewerNumber" resultType="int">
+        select count(*) from eduinfo WHERE reviewer is not NULL
+    </select>
+
+    <select id="getAllEduInfo" resultType="cn.kxind.mybatis.bean.EduInfo">
+        select * from eduinfo
+    </select>
+
+
+    <select id="getWordCount" resultType="String">
+        SELECT  mainText from eduinfo
+    </select>
+
+
+    <select id="getPieCountByYear" resultType="cn.kxind.mybatis.vo.WordCloudInfo">
+        select date_format(date,'%Y') AS name ,sum(number) as value
+        from eduinfo
+        GROUP BY name
+    </select>
+    <select id="getPieCountDataByYear" resultType="String">
+        select date_format(date,'%Y') AS name
+        from eduinfo
+        GROUP BY name
+    </select>
+
+    <select id="getPieCountByEditor" resultType="cn.kxind.mybatis.vo.WordCloudInfo">
+       select  editor as name ,COUNT(*) as value from eduinfo GROUP BY editor
+    </select>
+
+    <select id="getPieDataCountByEditor" resultType="String">
+        select  editor  from eduinfo GROUP BY editor
+    </select>
+
+    <select id="getPieCountByProofead" resultType="cn.kxind.mybatis.vo.WordCloudInfo">
+        select  proofread as name ,COUNT(*) as value from eduinfo GROUP BY proofread
+    </select>
+
+    <select id="getPieDataCountByProofead" resultType="String">
+        select  proofread  from eduinfo GROUP BY proofread
+    </select>
+
+
+    <select id="getVistorMonthByYear" parameterType="int" resultType="cn.kxind.mybatis.vo.WordCloudInfo">
+        SELECT  SUM(number) as value ,DATE_FORMAT(date,'%Y-%m') as name from eduinfo  where date like CONCAT(#{yy},'%' )
+        GROUP BY  name
+    </select>
+
+    <select id="getVistorMonthDataByYear" parameterType="int" resultType="String">
+        SELECT  DATE_FORMAT(date,'%Y-%m') as name from eduinfo  where date like  CONCAT(#{yy},'%' )
+        GROUP BY  name
+    </select>
+</mapper>

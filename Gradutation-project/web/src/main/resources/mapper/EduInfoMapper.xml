@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kxind.mybatis.dao.EduInfoMapper">
+  <resultMap id="BaseResultMap" type="cn.kxind.mybatis.bean.EduInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="imglist" jdbcType="VARCHAR" property="imglist" />
+    <result column="provider" jdbcType="VARCHAR" property="provider" />
+    <result column="editor" jdbcType="VARCHAR" property="editor" />
+    <result column="proofread" jdbcType="VARCHAR" property="proofread" />
+    <result column="reviewer" jdbcType="VARCHAR" property="reviewer" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.kxind.mybatis.bean.EduInfo">
+    <result column="mainText" jdbcType="LONGVARCHAR" property="maintext" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, source, number, date, imglist, provider, editor, proofread, reviewer
+  </sql>
+  <sql id="Blob_Column_List">
+    mainText
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from eduinfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from eduinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.kxind.mybatis.bean.EduInfo">
+    insert into eduinfo (id, title, source, 
+      number, date, imglist, 
+      provider, editor, proofread, 
+      reviewer, mainText)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, 
+      #{number,jdbcType=INTEGER}, #{date,jdbcType=DATE}, #{imglist,jdbcType=VARCHAR}, 
+      #{provider,jdbcType=VARCHAR}, #{editor,jdbcType=VARCHAR}, #{proofread,jdbcType=VARCHAR}, 
+      #{reviewer,jdbcType=VARCHAR}, #{maintext,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.kxind.mybatis.bean.EduInfo">
+    insert into eduinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="source != null">
+        source,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="imglist != null">
+        imglist,
+      </if>
+      <if test="provider != null">
+        provider,
+      </if>
+      <if test="editor != null">
+        editor,
+      </if>
+      <if test="proofread != null">
+        proofread,
+      </if>
+      <if test="reviewer != null">
+        reviewer,
+      </if>
+      <if test="maintext != null">
+        mainText,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="imglist != null">
+        #{imglist,jdbcType=VARCHAR},
+      </if>
+      <if test="provider != null">
+        #{provider,jdbcType=VARCHAR},
+      </if>
+      <if test="editor != null">
+        #{editor,jdbcType=VARCHAR},
+      </if>
+      <if test="proofread != null">
+        #{proofread,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewer != null">
+        #{reviewer,jdbcType=VARCHAR},
+      </if>
+      <if test="maintext != null">
+        #{maintext,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.kxind.mybatis.bean.EduInfo">
+    update eduinfo
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="imglist != null">
+        imglist = #{imglist,jdbcType=VARCHAR},
+      </if>
+      <if test="provider != null">
+        provider = #{provider,jdbcType=VARCHAR},
+      </if>
+      <if test="editor != null">
+        editor = #{editor,jdbcType=VARCHAR},
+      </if>
+      <if test="proofread != null">
+        proofread = #{proofread,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewer != null">
+        reviewer = #{reviewer,jdbcType=VARCHAR},
+      </if>
+      <if test="maintext != null">
+        mainText = #{maintext,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.kxind.mybatis.bean.EduInfo">
+    update eduinfo
+    set title = #{title,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      date = #{date,jdbcType=DATE},
+      imglist = #{imglist,jdbcType=VARCHAR},
+      provider = #{provider,jdbcType=VARCHAR},
+      editor = #{editor,jdbcType=VARCHAR},
+      proofread = #{proofread,jdbcType=VARCHAR},
+      reviewer = #{reviewer,jdbcType=VARCHAR},
+      mainText = #{maintext,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.kxind.mybatis.bean.EduInfo">
+    update eduinfo
+    set title = #{title,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      date = #{date,jdbcType=DATE},
+      imglist = #{imglist,jdbcType=VARCHAR},
+      provider = #{provider,jdbcType=VARCHAR},
+      editor = #{editor,jdbcType=VARCHAR},
+      proofread = #{proofread,jdbcType=VARCHAR},
+      reviewer = #{reviewer,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
